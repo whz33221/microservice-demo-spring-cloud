@@ -1,0 +1,32 @@
+#功能整合
+#1.发现服务
+#2.请求转发
+#3.请求熔断
+#4.识别指定url，请求前url重写
+#5.负载均衡 (依赖ribbon后，自动启动进行负载均衡)
+
+server:
+  port: 8080
+spring:
+  application:
+    name: gateway-application
+  cloud:
+    gateway:
+      routes:
+        - id: service-route
+          uri: lb://public-application
+          predicates:
+            - Path=/public-service/**
+          filters:
+            #第一个filter：整合熔断
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/error
+            #第二个filter：指定url重写
+            #当url为 /public-service时，重写为/public-service/createPerson?name=xiaomi并转发至lb://public-application
+            #- RewritePath=/public-service, /public-service/createPerson?name=xiaomi
+      discovery:
+        locator:
+          enabled: true
+
