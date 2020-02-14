@@ -1,10 +1,14 @@
 package com.springcloudstudy;
 
 
+import com.springcloudstudy.baseservice.controller.PersonController;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ConfigurableApplicationContext;
+
+import javax.validation.Valid;
 
 /**
  * 该注解启动自动装配，会根据本地class文件夹中，进行分析，通过spring.factories，
@@ -18,8 +22,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class BaseServiceApplication {
 
 
+
     public static void main(String[] args) {
-        ConfigurableApplicationContext run = SpringApplication.run(BaseServiceApplication.class, args);
+        ConfigurableApplicationContext c = SpringApplication.run(BaseServiceApplication.class, args);
+        PersonController controller = (PersonController)c.getBean("personController");
+        System.out.println(  controller.centerConfig);
 
 
     }
