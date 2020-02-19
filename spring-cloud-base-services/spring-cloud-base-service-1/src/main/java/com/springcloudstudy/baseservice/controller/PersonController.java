@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonController {
     @Autowired
     private PersonService personService;
-    @Value("${center.config}")
+    @Value("${config-center-test}")
     public String centerConfig;
+
+
     @GetMapping("/createPerson")
     public String createPerson(@RequestParam("name") String name){
         log.info("person基础服务被成功调用！");

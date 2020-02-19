@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    zookeeper:
+      config:
+        enabled: true
+        root: config
+        defaultContext: application
+        profileSeparator: ','
+  profiles:
+    active: dev
