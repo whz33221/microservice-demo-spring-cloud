@@ -6,5 +6,7 @@ spring:
         root: config
         defaultContext: application
         profileSeparator: ','
+        watcher:
+          enabled: false
   profiles:
     active: dev
